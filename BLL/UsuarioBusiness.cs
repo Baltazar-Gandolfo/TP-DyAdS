@@ -12,7 +12,6 @@ namespace BLL
     public class UsuarioBusiness
     {
         private readonly UsuarioData usuarioData = new UsuarioData();
-
         public UsuarioEntity Login(string nombreUsuario, string contraseña, string rol)
         {
             var usuario = usuarioData.getByNombreContraseña(nombreUsuario, contraseña, rol);

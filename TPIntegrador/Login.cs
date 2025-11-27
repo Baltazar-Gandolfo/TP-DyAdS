@@ -42,8 +42,8 @@ namespace TPIntegrador
                     comboBox1.Text
                 );
 
-                Form1 juego = new Form1(usuario);
-                juego.Show();
+                Form1 interfaz = new Form1(usuario);
+                interfaz.Show();
                 this.Hide();
             }
             catch (Exception ex)
