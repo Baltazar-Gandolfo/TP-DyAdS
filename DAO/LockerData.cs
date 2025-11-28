@@ -55,60 +55,92 @@ namespace DAO
         }
         public List<LockerEntity> ObtenerPorResidente(string residenteId)
         {
-            using (var context = new AppDbContext())
+            try
             {
-                return context.Lockers
-                    .Where(l => l.ResidenteId == residenteId)
-                    .Select(l => LockerMapper.Map(l))
-                    .ToList();
+                using (var context = new AppDbContext())
+                {
+                    return context.Lockers
+                        .Where(l => l.ResidenteId == residenteId)
+                        .Select(l => LockerMapper.Map(l))
+                        .ToList();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
 
         public void ActualizarLoceker(LockerEntity lockerEntity)
         {
-            using (var context = new AppDbContext())
+            try
             {
-                var lockerDb = context.Lockers.FirstOrDefault(l => l.LockerId == lockerEntity.Id);
+                using (var context = new AppDbContext())
+                {
+                    var lockerDb = context.Lockers.FirstOrDefault(l => l.LockerId == lockerEntity.Id);
 
-                if (lockerDb == null)
-                    throw new Exception("Locker no encontrado");
+                    if (lockerDb == null)
+                        throw new Exception("Locker no encontrado");
 
-                lockerDb.Ubicacion = lockerEntity.Ubicacion;
-                lockerDb.Tamano = lockerEntity.Tamaño;
-                lockerDb.Estado = lockerEntity.Estado;
-                lockerDb.CodigoActual = lockerEntity.Codigo_Actual;
-                lockerDb.FechaDeposito = lockerEntity.Fecha_Deposito;
-                lockerDb.TrackingPaquete = lockerEntity.Tracking_Paquete;
-                lockerDb.UltimaMantencion = lockerEntity.Ultima_Mantencion;
+                    lockerDb.Ubicacion = lockerEntity.Ubicacion;
+                    lockerDb.Tamano = lockerEntity.Tamaño;
+                    lockerDb.Estado = lockerEntity.Estado;
+                    lockerDb.CodigoActual = lockerEntity.Codigo_Actual;
+                    lockerDb.FechaDeposito = lockerEntity.Fecha_Deposito;
+                    lockerDb.TrackingPaquete = lockerEntity.Tracking_Paquete;
+                    lockerDb.UltimaMantencion = lockerEntity.Ultima_Mantencion;
 
-                lockerDb.ResidenteId = lockerEntity.ResidenteId;
-                lockerDb.RepartidorId = lockerEntity.RepartidorId;
+                    lockerDb.ResidenteId = lockerEntity.ResidenteId;
+                    lockerDb.RepartidorId = lockerEntity.RepartidorId;
 
-                context.SaveChanges();
+                    context.SaveChanges();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
         public void EliminarLocker(int idLocker)
         {
-            using (var context = new AppDbContext())
+            try
             {
-                var locker = context.Lockers.FirstOrDefault(l => l.LockerId == idLocker);
+                using (var context = new AppDbContext())
+                {
+                    var locker = context.Lockers.FirstOrDefault(l => l.LockerId == idLocker);
 
-                if (locker == null)
-                    throw new Exception("Locker no encontrado.");
+                    if (locker == null)
+                        throw new Exception("Locker no encontrado.");
 
-                context.Lockers.Remove(locker);
-                context.SaveChanges();
+                    context.Lockers.Remove(locker);
+                    context.SaveChanges();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
         public LockerEntity BuscarPorCodigo(string codigo)
         {
-            using (var context = new AppDbContext())
+            try
             {
-                var lockerDb = context.Lockers.FirstOrDefault(l => l.CodigoActual == codigo);
+                using (var context = new AppDbContext())
+                {
+                    var lockerDb = context.Lockers.FirstOrDefault(l => l.CodigoActual == codigo);
 
-                return lockerDb != null ? LockerMapper.Map(lockerDb) : null;
+                    return lockerDb != null ? LockerMapper.Map(lockerDb) : null;
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
     }

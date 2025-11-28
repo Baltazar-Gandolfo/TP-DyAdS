@@ -33,96 +33,99 @@ namespace TPIntegrador
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            actualizarDgvResidente();
-            actualizarDgvLockers();
-            actualizarDgvRepartidor();
-            CargarComboBoxLockers();
-            GenerarCodigoLocker();
-
-            // 1) Ocultar pestañas según rol
-            switch (usuarioLogueado.Rol.ToLower())
+            try
             {
-                case "residente":
-                    tabControl1.TabPages.Remove(tabPage3);
-                    break;
+                actualizarDgvResidente();
+                actualizarDgvLockers();
+                actualizarDgvRepartidor();
+                CargarComboBoxLockers();
+                GenerarCodigoLocker();
 
-                case "repartidor":
-                    tabControl1.TabPages.Remove(tabPage2);
-                    button5.Enabled = false;
-                    break;
+                // 1) Ocultar pestañas según rol
+                switch (usuarioLogueado.Rol.ToLower())
+                {
+                    case "residente":
+                        tabControl1.TabPages.Remove(tabPage3);
+                        break;
 
-                case "administrador":
-                    button5.Enabled = false;
-                    break;
+                    case "repartidor":
+                        tabControl1.TabPages.Remove(tabPage2);
+                        button5.Enabled = false;
+                        break;
+
+                    case "administrador":
+                        button5.Enabled = false;
+                        break;
+                }
+
+                // 2) Preparo el ID del usuario logueado
+                string id = usuarioLogueado.Id;
+
+                // 3) Consultar si ya existe en residentes
+                var residente = residenteBusiness.getById(id);
+
+                if (residente != null)
+                {
+                    textBox2.Text = residente.Id;
+
+                    txtNombre.Text = residente.Nombre;
+                    txtApellido.Text = residente.Apellido;
+                    txtDepto.Text = residente.Departamento;
+                    txtTelefono.Text = residente.Telefono;
+                    txtEmail.Text = residente.Email;
+                    comboTipoEnvio.Text = residente.Pref_Notificacion;
+
+                    // Deshabilitar alta
+                    button8.Enabled = false;
+
+                    // Habilitar editar / eliminar
+                    button7.Enabled = true;
+                    buttonEliminar.Enabled = true;
+                }
+                else
+                {
+                    // NO EXISTE → Se puede dar de alta
+                    button8.Enabled = true;
+                    button7.Enabled = false;
+                    buttonEliminar.Enabled = false;
+
+                    textBox2.Text = usuarioLogueado.Id;
+                }
+
+                comboTipoEnvio.Items.Clear();
+                comboTipoEnvio.Items.AddRange(new[] { "Email", "SMS", "Whatsapp" });
+
+                // 3) Consultar si ya existe en residentes
+                var repartidor = repartidorBusiness.getById(id);
+
+                if (repartidor != null)
+                {
+                    // YA EXISTE → completar datos
+                    textBox16.Text = repartidor.Id;  // AHORA es string, no ToString()
+
+                    textBoxNombreR.Text = repartidor.Nombre;
+                    txtApellidoR.Text = repartidor.Apellido;
+                    txtEmpresaR.Text = repartidor.Empresa;
+                    txtTelefonoR.Text = repartidor.Telefono;
+                    txtLegajoR.Text = repartidor.Num_Legajo;
+                    checkBoxR.Checked = repartidor.Credencial_Valida;
+
+                    // Deshabilitar alta
+                    buttonAltaRepartidor.Enabled = false;
+
+                    // Habilitar editar / eliminar
+                    buttonEditarRepartidor.Enabled = true;
+                    buttonEliminarRepartidor.Enabled = true;
+                }
+                else
+                {
+                    buttonAltaRepartidor.Enabled = true;
+                    buttonEliminarRepartidor.Enabled = false;
+
+                    textBox16.Text = usuarioLogueado.Id;
+                }
             }
-
-            // 2) Preparo el ID del usuario logueado
-            string id = usuarioLogueado.Id;
-
-            // 3) Consultar si ya existe en residentes
-            var residente = residenteBusiness.getById(id);
-
-            if (residente != null)
-            {
-                textBox2.Text = residente.Id;
-
-                txtNombre.Text = residente.Nombre;
-                txtApellido.Text = residente.Apellido;
-                txtDepto.Text = residente.Departamento;
-                txtTelefono.Text = residente.Telefono;
-                txtEmail.Text = residente.Email;
-                comboTipoEnvio.Text = residente.Pref_Notificacion;
-
-                // Deshabilitar alta
-                button8.Enabled = false;
-
-                // Habilitar editar / eliminar
-                button7.Enabled = true;
-                buttonEliminar.Enabled = true;
-            }
-            else
-            {
-                // NO EXISTE → Se puede dar de alta
-                button8.Enabled = true;
-                button7.Enabled = false;
-                buttonEliminar.Enabled = false;
-
-                textBox2.Text = usuarioLogueado.Id;
-            }
-
-            comboTipoEnvio.Items.Clear();
-            comboTipoEnvio.Items.AddRange(new[] { "Email", "SMS", "Whatsapp" });
-
-            // 3) Consultar si ya existe en residentes
-            var repartidor = repartidorBusiness.getById(id);
-
-            if (repartidor != null)
-            {
-                // YA EXISTE → completar datos
-                textBox16.Text = repartidor.Id;  // AHORA es string, no ToString()
-
-                textBoxNombreR.Text = repartidor.Nombre;
-                txtApellidoR.Text = repartidor.Apellido;
-                txtEmpresaR.Text = repartidor.Empresa;
-                txtTelefonoR.Text = repartidor.Telefono;
-                txtLegajoR.Text = repartidor.Num_Legajo;
-                checkBoxR.Checked = repartidor.Credencial_Valida;
-
-                // Deshabilitar alta
-                buttonAltaRepartidor.Enabled = false;
-
-                // Habilitar editar / eliminar
-                buttonEditarRepartidor.Enabled = true;
-                buttonEliminarRepartidor.Enabled = true;
-            }
-            else
-            {
-                buttonAltaRepartidor.Enabled = true;
-                buttonEliminarRepartidor.Enabled = false;
-
-                textBox16.Text = usuarioLogueado.Id;
-            }
-
+            catch (Exception ex){ MessageBox.Show(ex.Message);  }
 
         }
 
@@ -136,6 +139,7 @@ namespace TPIntegrador
 
         }
 
+        //DAR DE ALTA RESIDENTE
         private void button8_Click(object sender, EventArgs e)
         {
             try
@@ -172,48 +176,61 @@ namespace TPIntegrador
             }
         }
 
+        //CERRAR SESION
         private void button2_Click(object sender, EventArgs e)
         {
-            foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+            try
             {
-                if (!(form is Login))
-                    form.Close();
-            }
+                foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+                {
+                    if (!(form is Login))
+                        form.Close();
+                }
 
-            Login login = new Login();
-            login.Show();
+                Login login = new Login();
+                login.FormBorderStyle = FormBorderStyle.None;
+                login.Show();
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+        //ACTUALIZAR DATAGRID
         private void actualizarDgvResidente()
         {
-            if (usuarioLogueado.Rol.ToLower() != "residente")
+            try
             {
-                dataGridViewResidentes.DataSource = null;
-                return;
-            }
-
-            var residente = residenteBusiness.getById(usuarioLogueado.Id);
-
-            if (residente == null)
-            {
-                dataGridViewResidentes.DataSource = null;
-                return;
-            }
-
-            dataGridViewResidentes.DataSource = new List<ResidenteEntity> { residente }
-                .Select(r => new
+                if (usuarioLogueado.Rol.ToLower() != "residente")
                 {
+                    dataGridViewResidentes.DataSource = null;
+                    return;
+                }
 
-                    r.Nombre,
-                    r.Apellido,
-                    r.Telefono,
-                    r.Email,
-                    r.Departamento,
-                    r.Pref_Notificacion
-                })
-                .ToList();
+                var residente = residenteBusiness.getById(usuarioLogueado.Id);
+
+                if (residente == null)
+                {
+                    dataGridViewResidentes.DataSource = null;
+                    return;
+                }
+
+                dataGridViewResidentes.DataSource = new List<ResidenteEntity> { residente }
+                    .Select(r => new
+                    {
+
+                        r.Nombre,
+                        r.Apellido,
+                        r.Telefono,
+                        r.Email,
+                        r.Departamento,
+                        r.Pref_Notificacion
+                    })
+                    .ToList();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
+        //ACTUALIZAR RESIDENTE
         private void button7_Click(object sender, EventArgs e)
         {
             try
@@ -240,6 +257,7 @@ namespace TPIntegrador
             }
         }
 
+        //ELIMINAR RESIDENTE
         private void buttonEliminar_Click(object sender, EventArgs e)
         {
             try
@@ -287,109 +305,140 @@ namespace TPIntegrador
                 MessageBox.Show(ex.InnerException?.Message ?? ex.Message);
             }
         }
+
+        //ACTUALIZAR DATAGRID LOCKERS
         private void actualizarDgvLockers()
         {
-            var lockers = lockerBusiness.ObtenerTodos();
-
-            if (usuarioLogueado.Rol.ToLower() == "residente")
+            try
             {
-                lockers = lockers
-                    .Where(l => l.Residente != null && l.Residente.Id == usuarioLogueado.Id)
-                    .ToList();
+                var lockers = lockerBusiness.getAll();
+
+                if (usuarioLogueado.Rol.ToLower() == "residente")
+                {
+                    lockers = lockers
+                        .Where(l => l.Residente != null && l.Residente.Id == usuarioLogueado.Id)
+                        .ToList();
+                }
+                else if (usuarioLogueado.Rol.ToLower() == "repartidor")
+                {
+                    lockers = lockers
+                        .Where(l => l.Repartidor != null && l.Repartidor.Id == usuarioLogueado.Id)
+                        .ToList();
+                }
+
+                dataGridView1.DataSource = lockers.Select(l => new
+                {
+                    l.Id,
+                    l.Ubicacion,
+                    l.Tamaño,
+                    l.Estado,
+                    l.Tracking_Paquete,
+                    l.Fecha_Deposito,
+                    l.Ultima_Mantencion,
+                    l.Codigo_Actual,
+
+                    // Datos del residente asignado  
+                    ResidenteNombre = l.Residente?.Nombre,
+                    ResidenteApellido = l.Residente?.Apellido,
+
+                    // Datos del repartidor asignado  
+                    RepartidorNombre = l.Repartidor?.Nombre,
+                    RepartidorApellido = l.Repartidor?.Apellido
+
+                }).ToList();
             }
-            else if (usuarioLogueado.Rol.ToLower() == "repartidor")
+            catch (Exception ex)
             {
-                lockers = lockers
-                    .Where(l => l.Repartidor != null && l.Repartidor.Id == usuarioLogueado.Id)
-                    .ToList();
+                MessageBox.Show(ex.Message);
             }
-
-            dataGridView1.DataSource = lockers.Select(l => new
-            {
-                l.Id,
-                l.Ubicacion,
-                l.Tamaño,
-                l.Estado,
-                l.Tracking_Paquete,
-                l.Fecha_Deposito,
-                l.Ultima_Mantencion,
-                l.Codigo_Actual,
-
-                // Datos del residente asignado  
-                ResidenteNombre = l.Residente?.Nombre,
-                ResidenteApellido = l.Residente?.Apellido,
-
-                // Datos del repartidor asignado  
-                RepartidorNombre = l.Repartidor?.Nombre,
-                RepartidorApellido = l.Repartidor?.Apellido
-
-            }).ToList();
         }
 
+        //ACTUALIZAR DATAGRID REPARTIDORES
         private void actualizarDgvRepartidor()
         {
-            if (usuarioLogueado.Rol.ToLower() != "repartidor")
+            try
             {
-                dataGridView3.DataSource = null;
-                return;
-            }
-
-            var repartidor = repartidorBusiness.getById(usuarioLogueado.Id);
-
-            if (repartidor == null)
-            {
-                dataGridView3.DataSource = null;
-                return;
-            }
-
-            dataGridView3.DataSource = new List<RepartidorEntity> { repartidor }
-                .Select(r => new
+                if (usuarioLogueado.Rol.ToLower() != "repartidor")
                 {
-                    r.Id,
-                    r.Nombre,
-                    r.Apellido,
-                    r.Empresa,
-                    r.Num_Legajo,
-                    r.Telefono,
-                    r.Credencial_Valida
-                })
-                .ToList();
+                    dataGridView3.DataSource = null;
+                    return;
+                }
+
+                var repartidor = repartidorBusiness.getById(usuarioLogueado.Id);
+
+                if (repartidor == null)
+                {
+                    dataGridView3.DataSource = null;
+                    return;
+                }
+
+                dataGridView3.DataSource = new List<RepartidorEntity> { repartidor }
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Nombre,
+                        r.Apellido,
+                        r.Empresa,
+                        r.Num_Legajo,
+                        r.Telefono,
+                        r.Credencial_Valida
+                    })
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
+        //ACTUALIZAR COMBOS LOCKER
         private void CargarComboBoxLockers()
         {
-            comboBoxLockers.DataSource = null;
-
-            List<LockerEntity> lockersUsuario = new List<LockerEntity>();
-
-            if (usuarioLogueado.Rol.ToLower() == "residente")
+            try
             {
-                lockersUsuario = lockerBusiness.ObtenerLockersDeResidente(usuarioLogueado.Id)
-                                               ?? new List<LockerEntity>();
+                comboBoxLockers.DataSource = null;
+
+                List<LockerEntity> lockersUsuario = new List<LockerEntity>();
+
+                if (usuarioLogueado.Rol.ToLower() == "residente")
+                {
+                    lockersUsuario = lockerBusiness.ObtenerLockersDeResidente(usuarioLogueado.Id)
+                                                   ?? new List<LockerEntity>();
+                }
+
+                comboBoxLockers.DisplayMember = "Ubicacion";
+                comboBoxLockers.ValueMember = "Id";
+                comboBoxLockers.DataSource = lockersUsuario;
+
+                if (lockersUsuario.Count == 0)
+                    comboBoxLockers.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
-            comboBoxLockers.DisplayMember = "Ubicacion";
-            comboBoxLockers.ValueMember = "Id";
-            comboBoxLockers.DataSource = lockersUsuario;
-
-            if (lockersUsuario.Count == 0)
-                comboBoxLockers.SelectedIndex = -1;
         }
 
+        //GENERAR CODIGOLOCKER
         private string GenerarCodigoLocker()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             Random random = new Random();
-            return new string(Enumerable.Repeat(chars, 4)
+            return (new string(Enumerable.Repeat(chars, 4)
                 .Select(s => s[random.Next(s.Length)])
-                .ToArray());
+                .ToArray()));
+
         }
+
+        //ASOCIAR LOCKER
         private void asociarLocker_Click(object sender, EventArgs e)
         {
             try
             {
                 // 1. OBTENER PRIMER LOCKER DISPONIBLE
-                var lockerDisponible = lockerBusiness.ObtenerTodos()
+                var lockerDisponible = lockerBusiness.getAll()
                     .FirstOrDefault(l => l.Estado == "Disponible");
 
                 if (lockerDisponible == null)
@@ -440,6 +489,7 @@ namespace TPIntegrador
             }
         }
 
+        //ELIMINAR LOCKER
         private void button5_Click(object sender, EventArgs e)
         {
             try
@@ -484,47 +534,56 @@ namespace TPIntegrador
 
         }
 
+        //GENERAR QR
         private void GenerarQR_Click(object sender, EventArgs e)
         {
-            // 1. Validar selección
-            if (comboBoxLockers.SelectedItem == null)
+            try
             {
-                MessageBox.Show("Seleccione un locker.");
-                return;
+                // 1. Validar selección
+                if (comboBoxLockers.SelectedItem == null)
+                {
+                    MessageBox.Show("Seleccione un locker.");
+                    return;
+                }
+
+                var lockerSeleccionado = (LockerEntity)comboBoxLockers.SelectedItem;
+
+                if (string.IsNullOrEmpty(lockerSeleccionado.Codigo_Actual))
+                {
+                    MessageBox.Show("El locker no tiene código asignado.");
+                    return;
+                }
+
+                // 2. GENERAR EL QR
+                var qrGenerator = new QRCodeGenerator();
+                var qrCodeData = qrGenerator.CreateQrCode(lockerSeleccionado.Codigo_Actual, QRCodeGenerator.ECCLevel.Q);
+                var qrCode = new QRCode(qrCodeData);
+
+                Bitmap qrImage = qrCode.GetGraphic(12);
+
+                // Mostrar QR en PictureBox
+                Bitmap qrResize = new Bitmap(qrImage, pictureQr.Width, pictureQr.Height);
+                pictureQr.Image = qrResize;
+
+
+                // 3. CAMBIAR ESTADO A ENTREGADO
+                lockerSeleccionado.Estado = "Entregado";
+                lockerSeleccionado.Tracking_Paquete = "Paquete entregado automáticamente";
+                lockerSeleccionado.Ultima_Mantencion = DateTime.Now;
+
+                lockerBusiness.ActualizarLoceker(lockerSeleccionado);
+
+                MessageBox.Show("📦 Locker marcado como ENTREGADO y QR generado correctamente.");
+
+                // 4. Actualizar pantalla
+                actualizarDgvLockers();
+                CargarComboBoxLockers();
             }
-
-            var lockerSeleccionado = (LockerEntity)comboBoxLockers.SelectedItem;
-
-            if (string.IsNullOrEmpty(lockerSeleccionado.Codigo_Actual))
+            catch (Exception ex)
             {
-                MessageBox.Show("El locker no tiene código asignado.");
-                return;
+                MessageBox.Show(ex.Message);
             }
-
-            // 2. GENERAR EL QR
-            var qrGenerator = new QRCodeGenerator();
-            var qrCodeData = qrGenerator.CreateQrCode(lockerSeleccionado.Codigo_Actual, QRCodeGenerator.ECCLevel.Q);
-            var qrCode = new QRCode(qrCodeData);
-
-            Bitmap qrImage = qrCode.GetGraphic(12);
-
-            // Mostrar QR en PictureBox
-            Bitmap qrResize = new Bitmap(qrImage, pictureQr.Width, pictureQr.Height);
-            pictureQr.Image = qrResize;
-
-
-            // 3. CAMBIAR ESTADO A ENTREGADO
-            lockerSeleccionado.Estado = "Entregado";
-            lockerSeleccionado.Tracking_Paquete = "Paquete entregado automáticamente";
-            lockerSeleccionado.Ultima_Mantencion = DateTime.Now;
-
-            lockerBusiness.ActualizarLoceker(lockerSeleccionado);
-
-            MessageBox.Show("📦 Locker marcado como ENTREGADO y QR generado correctamente.");
-
-            // 4. Actualizar pantalla
-            actualizarDgvLockers();
-            CargarComboBoxLockers();
+           
         }
 
         //boton alta datos de repartidores
@@ -545,7 +604,7 @@ namespace TPIntegrador
         }
 
 
-
+        //ELIMINAR REPARTIDOR
         private void buttonEliminarRepartidor_Click_1(object sender, EventArgs e)
         {
 
@@ -563,7 +622,7 @@ namespace TPIntegrador
                 }
 
                 // 2. BUSCAR LOCKERS ASOCIADOS
-                var lockersAsociados = lockerBusiness.ObtenerTodos()
+                var lockersAsociados = lockerBusiness.getAll()
                     .Where(l => l.RepartidorId == id)
                     .ToList();
 
@@ -636,7 +695,7 @@ namespace TPIntegrador
         }
 
 
-
+        //ALTA REPARTIDOR
         private void buttonAltaRepartidor_Click(object sender, EventArgs e)
         {
 
@@ -679,6 +738,7 @@ namespace TPIntegrador
 
         }
 
+        //EDITAR REPARTIDOR
         private void buttonEditarRepartidor_Click_1(object sender, EventArgs e)
         {
             try

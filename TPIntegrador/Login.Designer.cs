@@ -37,6 +37,7 @@
             underlineUser = new Panel();
             panel1 = new Panel();
             underlinePass = new Panel();
+            button1 = new Button();
             SuspendLayout();
             // 
             // loginUser
@@ -46,7 +47,7 @@
             loginUser.Font = new Font("Segoe UI", 12F);
             loginUser.Location = new Point(200, 97);
             loginUser.Name = "loginUser";
-            loginUser.Size = new Size(350, 32);
+            loginUser.Size = new Size(350, 22);
             loginUser.TabIndex = 1;
             // 
             // claveUser
@@ -55,7 +56,7 @@
             claveUser.Font = new Font("Segoe UI", 12F);
             claveUser.Location = new Point(200, 205);
             claveUser.Name = "claveUser";
-            claveUser.Size = new Size(350, 32);
+            claveUser.Size = new Size(350, 22);
             claveUser.TabIndex = 4;
             claveUser.UseSystemPasswordChar = true;
             // 
@@ -83,7 +84,7 @@
             comboBox1.ForeColor = Color.Black;
             comboBox1.Location = new Point(200, 310);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(350, 40);
+            comboBox1.Size = new Size(350, 29);
             comboBox1.TabIndex = 7;
             // 
             // labelUser
@@ -94,7 +95,7 @@
             labelUser.ForeColor = Color.Black;
             labelUser.Location = new Point(200, 48);
             labelUser.Name = "labelUser";
-            labelUser.Size = new Size(238, 32);
+            labelUser.Size = new Size(159, 21);
             labelUser.TabIndex = 0;
             labelUser.Text = "Nombre de Usuario";
             // 
@@ -106,7 +107,7 @@
             labelPass.ForeColor = Color.Black;
             labelPass.Location = new Point(200, 161);
             labelPass.Name = "labelPass";
-            labelPass.Size = new Size(143, 32);
+            labelPass.Size = new Size(96, 21);
             labelPass.TabIndex = 3;
             labelPass.Text = "Contraseña";
             // 
@@ -118,7 +119,7 @@
             labelRol.ForeColor = Color.Black;
             labelRol.Location = new Point(200, 265);
             labelRol.Name = "labelRol";
-            labelRol.Size = new Size(51, 32);
+            labelRol.Size = new Size(35, 21);
             labelRol.TabIndex = 6;
             labelRol.Text = "Rol";
             // 
@@ -130,7 +131,7 @@
             lbl_registro.ForeColor = Color.White;
             lbl_registro.Location = new Point(306, 456);
             lbl_registro.Name = "lbl_registro";
-            lbl_registro.Size = new Size(107, 28);
+            lbl_registro.Size = new Size(76, 19);
             lbl_registro.TabIndex = 8;
             lbl_registro.TabStop = true;
             lbl_registro.Text = "Registrarse";
@@ -162,10 +163,21 @@
             underlinePass.Size = new Size(350, 2);
             underlinePass.TabIndex = 5;
             // 
+            // button1
+            // 
+            button1.Location = new Point(590, 443);
+            button1.Name = "button1";
+            button1.Size = new Size(139, 45);
+            button1.TabIndex = 10;
+            button1.Text = "Salir";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
             // Login
             // 
             BackColor = Color.White;
             ClientSize = new Size(750, 520);
+            Controls.Add(button1);
             Controls.Add(labelUser);
             Controls.Add(loginUser);
             Controls.Add(underlineUser);
@@ -186,5 +198,6 @@
             PerformLayout();
         }
         private Panel underlinePass;
+        private Button button1;
     }
 }

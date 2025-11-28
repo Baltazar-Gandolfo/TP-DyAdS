@@ -60,6 +60,8 @@
             label12 = new Label();
             label13 = new Label();
             tabPage3 = new TabPage();
+            textBoxNombreR = new TextBox();
+            label5 = new Label();
             label4 = new Label();
             txtTelefonoR = new TextBox();
             checkBoxR = new CheckBox();
@@ -76,8 +78,6 @@
             label17 = new Label();
             label18 = new Label();
             dataGridView3 = new DataGridView();
-            label5 = new Label();
-            textBoxNombreR = new TextBox();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureQr).BeginInit();
@@ -93,10 +93,11 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
-            tabControl1.Location = new Point(11, 12);
+            tabControl1.Location = new Point(8, 7);
+            tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(779, 552);
+            tabControl1.Size = new Size(545, 331);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -110,28 +111,31 @@
             tabPage1.Controls.Add(button5);
             tabPage1.Controls.Add(label6);
             tabPage1.Controls.Add(dataGridView1);
-            tabPage1.Location = new Point(4, 34);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Margin = new Padding(2);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(771, 514);
+            tabPage1.Padding = new Padding(2);
+            tabPage1.Size = new Size(537, 303);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Lockers";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // pictureQr
             // 
-            pictureQr.Location = new Point(472, 209);
+            pictureQr.Location = new Point(330, 125);
+            pictureQr.Margin = new Padding(2);
             pictureQr.Name = "pictureQr";
-            pictureQr.Size = new Size(264, 223);
+            pictureQr.Size = new Size(185, 134);
             pictureQr.SizeMode = PictureBoxSizeMode.Zoom;
             pictureQr.TabIndex = 59;
             pictureQr.TabStop = false;
             // 
             // GenerarQR
             // 
-            GenerarQR.Location = new Point(288, 270);
+            GenerarQR.Location = new Point(202, 162);
+            GenerarQR.Margin = new Padding(2);
             GenerarQR.Name = "GenerarQR";
-            GenerarQR.Size = new Size(160, 33);
+            GenerarQR.Size = new Size(112, 20);
             GenerarQR.TabIndex = 34;
             GenerarQR.Text = "Generar QR";
             GenerarQR.UseVisualStyleBackColor = true;
@@ -139,9 +143,10 @@
             // 
             // button2
             // 
-            button2.Location = new Point(590, 460);
+            button2.Location = new Point(413, 276);
+            button2.Margin = new Padding(2);
             button2.Name = "button2";
-            button2.Size = new Size(155, 33);
+            button2.Size = new Size(108, 20);
             button2.TabIndex = 33;
             button2.Text = "Cerrar Sesion";
             button2.UseVisualStyleBackColor = true;
@@ -149,17 +154,19 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(112, 272);
+            textBox1.Location = new Point(78, 163);
+            textBox1.Margin = new Padding(2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 31);
+            textBox1.Size = new Size(106, 23);
             textBox1.TabIndex = 31;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(21, 275);
+            label1.Location = new Point(15, 165);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(36, 25);
+            label1.Size = new Size(24, 15);
             label1.TabIndex = 23;
             label1.Text = "Pin";
             label1.Click += label1_Click;
@@ -167,16 +174,18 @@
             // comboBoxLockers
             // 
             comboBoxLockers.FormattingEnabled = true;
-            comboBoxLockers.Location = new Point(112, 209);
+            comboBoxLockers.Location = new Point(78, 125);
+            comboBoxLockers.Margin = new Padding(2);
             comboBoxLockers.Name = "comboBoxLockers";
-            comboBoxLockers.Size = new Size(150, 33);
+            comboBoxLockers.Size = new Size(106, 23);
             comboBoxLockers.TabIndex = 20;
             // 
             // button5
             // 
-            button5.Location = new Point(288, 201);
+            button5.Location = new Point(202, 121);
+            button5.Margin = new Padding(2);
             button5.Name = "button5";
-            button5.Size = new Size(160, 33);
+            button5.Size = new Size(112, 20);
             button5.TabIndex = 19;
             button5.Text = "Eliminar";
             button5.UseVisualStyleBackColor = true;
@@ -185,19 +194,21 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(21, 209);
+            label6.Location = new Point(15, 125);
+            label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(71, 25);
+            label6.Size = new Size(47, 15);
             label6.TabIndex = 6;
             label6.Text = "Lockers";
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(6, 7);
+            dataGridView1.Location = new Point(4, 4);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(756, 157);
+            dataGridView1.Size = new Size(529, 94);
             dataGridView1.TabIndex = 0;
             // 
             // tabPage2
@@ -221,10 +232,11 @@
             tabPage2.Controls.Add(label11);
             tabPage2.Controls.Add(label12);
             tabPage2.Controls.Add(label13);
-            tabPage2.Location = new Point(4, 34);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Margin = new Padding(2);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(771, 514);
+            tabPage2.Padding = new Padding(2);
+            tabPage2.Size = new Size(537, 303);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Residentes";
             tabPage2.UseVisualStyleBackColor = true;
@@ -233,17 +245,19 @@
             // dataGridViewResidentes
             // 
             dataGridViewResidentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewResidentes.Location = new Point(6, 7);
+            dataGridViewResidentes.Location = new Point(4, 4);
+            dataGridViewResidentes.Margin = new Padding(2);
             dataGridViewResidentes.Name = "dataGridViewResidentes";
             dataGridViewResidentes.RowHeadersWidth = 62;
-            dataGridViewResidentes.Size = new Size(756, 206);
+            dataGridViewResidentes.Size = new Size(529, 124);
             dataGridViewResidentes.TabIndex = 1;
             // 
             // asociarLocker
             // 
-            asociarLocker.Location = new Point(469, 405);
+            asociarLocker.Location = new Point(328, 243);
+            asociarLocker.Margin = new Padding(2);
             asociarLocker.Name = "asociarLocker";
-            asociarLocker.Size = new Size(162, 33);
+            asociarLocker.Size = new Size(113, 20);
             asociarLocker.TabIndex = 48;
             asociarLocker.Text = "Asociar Lockers";
             asociarLocker.UseVisualStyleBackColor = true;
@@ -252,48 +266,54 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(32, 469);
+            label3.Location = new Point(22, 281);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(99, 25);
+            label3.Size = new Size(65, 15);
             label3.TabIndex = 47;
             label3.Text = "Tipo Envio:";
             // 
             // comboTipoEnvio
             // 
             comboTipoEnvio.FormattingEnabled = true;
-            comboTipoEnvio.Location = new Point(202, 461);
+            comboTipoEnvio.Location = new Point(141, 277);
+            comboTipoEnvio.Margin = new Padding(2);
             comboTipoEnvio.Name = "comboTipoEnvio";
-            comboTipoEnvio.Size = new Size(150, 33);
+            comboTipoEnvio.Size = new Size(106, 23);
             comboTipoEnvio.TabIndex = 46;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(32, 188);
+            label2.Location = new Point(22, 113);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(34, 25);
+            label2.Size = new Size(21, 15);
             label2.TabIndex = 45;
             label2.Text = "ID:";
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(202, 182);
+            textBox2.Location = new Point(141, 109);
+            textBox2.Margin = new Padding(2);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(150, 31);
+            textBox2.Size = new Size(106, 23);
             textBox2.TabIndex = 44;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(202, 413);
+            txtEmail.Location = new Point(141, 248);
+            txtEmail.Margin = new Padding(2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(150, 31);
+            txtEmail.Size = new Size(106, 23);
             txtEmail.TabIndex = 41;
             // 
             // buttonEliminar
             // 
-            buttonEliminar.Location = new Point(491, 339);
+            buttonEliminar.Location = new Point(344, 203);
+            buttonEliminar.Margin = new Padding(2);
             buttonEliminar.Name = "buttonEliminar";
-            buttonEliminar.Size = new Size(111, 33);
+            buttonEliminar.Size = new Size(78, 20);
             buttonEliminar.TabIndex = 38;
             buttonEliminar.Text = "Eliminar";
             buttonEliminar.UseVisualStyleBackColor = true;
@@ -301,9 +321,10 @@
             // 
             // button7
             // 
-            button7.Location = new Point(491, 281);
+            button7.Location = new Point(344, 169);
+            button7.Margin = new Padding(2);
             button7.Name = "button7";
-            button7.Size = new Size(111, 33);
+            button7.Size = new Size(78, 20);
             button7.TabIndex = 37;
             button7.Text = "Editar";
             button7.UseVisualStyleBackColor = true;
@@ -311,9 +332,10 @@
             // 
             // button8
             // 
-            button8.Location = new Point(491, 231);
+            button8.Location = new Point(344, 139);
+            button8.Margin = new Padding(2);
             button8.Name = "button8";
-            button8.Size = new Size(111, 33);
+            button8.Size = new Size(78, 20);
             button8.TabIndex = 36;
             button8.Text = "Guardar";
             button8.UseVisualStyleBackColor = true;
@@ -321,74 +343,83 @@
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(202, 366);
+            txtTelefono.Location = new Point(141, 220);
+            txtTelefono.Margin = new Padding(2);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(150, 31);
+            txtTelefono.Size = new Size(106, 23);
             txtTelefono.TabIndex = 33;
             // 
             // txtDepto
             // 
-            txtDepto.Location = new Point(202, 319);
+            txtDepto.Location = new Point(141, 191);
+            txtDepto.Margin = new Padding(2);
             txtDepto.Name = "txtDepto";
-            txtDepto.Size = new Size(150, 31);
+            txtDepto.Size = new Size(106, 23);
             txtDepto.TabIndex = 32;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(202, 276);
+            txtApellido.Location = new Point(141, 166);
+            txtApellido.Margin = new Padding(2);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(150, 31);
+            txtApellido.Size = new Size(106, 23);
             txtApellido.TabIndex = 31;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(202, 233);
+            txtNombre.Location = new Point(141, 140);
+            txtNombre.Margin = new Padding(2);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(150, 31);
+            txtNombre.Size = new Size(106, 23);
             txtNombre.TabIndex = 30;
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(32, 413);
+            label9.Location = new Point(22, 248);
+            label9.Margin = new Padding(2, 0, 2, 0);
             label9.Name = "label9";
-            label9.Size = new Size(58, 25);
+            label9.Size = new Size(39, 15);
             label9.TabIndex = 27;
             label9.Text = "Email:";
             // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(32, 366);
+            label10.Location = new Point(22, 220);
+            label10.Margin = new Padding(2, 0, 2, 0);
             label10.Name = "label10";
-            label10.Size = new Size(83, 25);
+            label10.Size = new Size(55, 15);
             label10.TabIndex = 26;
             label10.Text = "Telefono:";
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(32, 326);
+            label11.Location = new Point(22, 196);
+            label11.Margin = new Padding(2, 0, 2, 0);
             label11.Name = "label11";
-            label11.Size = new Size(131, 25);
+            label11.Size = new Size(86, 15);
             label11.TabIndex = 25;
             label11.Text = "Departamento:";
             // 
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(32, 283);
+            label12.Location = new Point(22, 170);
+            label12.Margin = new Padding(2, 0, 2, 0);
             label12.Name = "label12";
-            label12.Size = new Size(82, 25);
+            label12.Size = new Size(54, 15);
             label12.TabIndex = 24;
             label12.Text = "Apellido:";
             // 
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(32, 239);
+            label13.Location = new Point(22, 143);
+            label13.Margin = new Padding(2, 0, 2, 0);
             label13.Name = "label13";
-            label13.Size = new Size(82, 25);
+            label13.Size = new Size(54, 15);
             label13.TabIndex = 23;
             label13.Text = "Nombre:";
             // 
@@ -412,44 +443,67 @@
             tabPage3.Controls.Add(label17);
             tabPage3.Controls.Add(label18);
             tabPage3.Controls.Add(dataGridView3);
-            tabPage3.Location = new Point(4, 34);
+            tabPage3.Location = new Point(4, 24);
+            tabPage3.Margin = new Padding(2);
             tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(771, 514);
+            tabPage3.Padding = new Padding(2);
+            tabPage3.Size = new Size(537, 303);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Repartidores";
             tabPage3.UseVisualStyleBackColor = true;
             // 
+            // textBoxNombreR
+            // 
+            textBoxNombreR.Location = new Point(140, 143);
+            textBoxNombreR.Margin = new Padding(2);
+            textBoxNombreR.Name = "textBoxNombreR";
+            textBoxNombreR.Size = new Size(106, 23);
+            textBoxNombreR.TabIndex = 63;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(22, 116);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(21, 15);
+            label5.TabIndex = 62;
+            label5.Text = "ID:";
+            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(30, 424);
+            label4.Location = new Point(21, 254);
+            label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(83, 25);
+            label4.Size = new Size(55, 15);
             label4.TabIndex = 61;
             label4.Text = "Telefono:";
             // 
             // txtTelefonoR
             // 
-            txtTelefonoR.Location = new Point(200, 418);
+            txtTelefonoR.Location = new Point(140, 251);
+            txtTelefonoR.Margin = new Padding(2);
             txtTelefonoR.Name = "txtTelefonoR";
-            txtTelefonoR.Size = new Size(150, 31);
+            txtTelefonoR.Size = new Size(106, 23);
             txtTelefonoR.TabIndex = 60;
             // 
             // checkBoxR
             // 
             checkBoxR.AutoSize = true;
-            checkBoxR.Location = new Point(200, 467);
+            checkBoxR.Location = new Point(140, 280);
+            checkBoxR.Margin = new Padding(2);
             checkBoxR.Name = "checkBoxR";
-            checkBoxR.Size = new Size(22, 21);
+            checkBoxR.Size = new Size(15, 14);
             checkBoxR.TabIndex = 59;
             checkBoxR.UseVisualStyleBackColor = true;
             // 
             // buttonAltaRepartidor
             // 
-            buttonAltaRepartidor.Location = new Point(412, 234);
+            buttonAltaRepartidor.Location = new Point(288, 140);
+            buttonAltaRepartidor.Margin = new Padding(2);
             buttonAltaRepartidor.Name = "buttonAltaRepartidor";
-            buttonAltaRepartidor.Size = new Size(111, 33);
+            buttonAltaRepartidor.Size = new Size(78, 20);
             buttonAltaRepartidor.TabIndex = 57;
             buttonAltaRepartidor.Text = "Alta";
             buttonAltaRepartidor.UseVisualStyleBackColor = true;
@@ -457,9 +511,10 @@
             // 
             // buttonEditarRepartidor
             // 
-            buttonEditarRepartidor.Location = new Point(412, 332);
+            buttonEditarRepartidor.Location = new Point(288, 199);
+            buttonEditarRepartidor.Margin = new Padding(2);
             buttonEditarRepartidor.Name = "buttonEditarRepartidor";
-            buttonEditarRepartidor.Size = new Size(111, 33);
+            buttonEditarRepartidor.Size = new Size(78, 20);
             buttonEditarRepartidor.TabIndex = 56;
             buttonEditarRepartidor.Text = "Editar";
             buttonEditarRepartidor.UseVisualStyleBackColor = true;
@@ -467,9 +522,10 @@
             // 
             // buttonEliminarRepartidor
             // 
-            buttonEliminarRepartidor.Location = new Point(412, 282);
+            buttonEliminarRepartidor.Location = new Point(288, 169);
+            buttonEliminarRepartidor.Margin = new Padding(2);
             buttonEliminarRepartidor.Name = "buttonEliminarRepartidor";
-            buttonEliminarRepartidor.Size = new Size(111, 33);
+            buttonEliminarRepartidor.Size = new Size(78, 20);
             buttonEliminarRepartidor.TabIndex = 55;
             buttonEliminarRepartidor.Text = "Elimininar";
             buttonEliminarRepartidor.UseVisualStyleBackColor = true;
@@ -477,39 +533,44 @@
             // 
             // txtLegajoR
             // 
-            txtLegajoR.Location = new Point(200, 368);
+            txtLegajoR.Location = new Point(140, 221);
+            txtLegajoR.Margin = new Padding(2);
             txtLegajoR.Name = "txtLegajoR";
-            txtLegajoR.Size = new Size(150, 31);
+            txtLegajoR.Size = new Size(106, 23);
             txtLegajoR.TabIndex = 53;
             // 
             // txtEmpresaR
             // 
-            txtEmpresaR.Location = new Point(200, 321);
+            txtEmpresaR.Location = new Point(140, 193);
+            txtEmpresaR.Margin = new Padding(2);
             txtEmpresaR.Name = "txtEmpresaR";
-            txtEmpresaR.Size = new Size(150, 31);
+            txtEmpresaR.Size = new Size(106, 23);
             txtEmpresaR.TabIndex = 52;
             // 
             // txtApellidoR
             // 
-            txtApellidoR.Location = new Point(200, 278);
+            txtApellidoR.Location = new Point(140, 167);
+            txtApellidoR.Margin = new Padding(2);
             txtApellidoR.Name = "txtApellidoR";
-            txtApellidoR.Size = new Size(150, 31);
+            txtApellidoR.Size = new Size(106, 23);
             txtApellidoR.TabIndex = 51;
             // 
             // textBox16
             // 
-            textBox16.Location = new Point(200, 190);
+            textBox16.Location = new Point(140, 114);
+            textBox16.Margin = new Padding(2);
             textBox16.Name = "textBox16";
-            textBox16.Size = new Size(150, 31);
+            textBox16.Size = new Size(106, 23);
             textBox16.TabIndex = 50;
             textBox16.TextChanged += textBox16_TextChanged;
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(30, 463);
+            label8.Location = new Point(21, 278);
+            label8.Margin = new Padding(2, 0, 2, 0);
             label8.Name = "label8";
-            label8.Size = new Size(97, 25);
+            label8.Size = new Size(66, 15);
             label8.TabIndex = 48;
             label8.Text = "Credencial:";
             label8.TextAlign = ContentAlignment.TopRight;
@@ -517,71 +578,63 @@
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(30, 368);
+            label15.Location = new Point(21, 221);
+            label15.Margin = new Padding(2, 0, 2, 0);
             label15.Name = "label15";
-            label15.Size = new Size(93, 25);
+            label15.Size = new Size(62, 15);
             label15.TabIndex = 47;
             label15.Text = "Legajo N°:";
             // 
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(30, 328);
+            label16.Location = new Point(21, 197);
+            label16.Margin = new Padding(2, 0, 2, 0);
             label16.Name = "label16";
-            label16.Size = new Size(84, 25);
+            label16.Size = new Size(55, 15);
             label16.TabIndex = 46;
             label16.Text = "Empresa:";
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(29, 285);
+            label17.Location = new Point(20, 171);
+            label17.Margin = new Padding(2, 0, 2, 0);
             label17.Name = "label17";
-            label17.Size = new Size(82, 25);
+            label17.Size = new Size(54, 15);
             label17.TabIndex = 45;
             label17.Text = "Apellido:";
             // 
             // label18
             // 
             label18.AutoSize = true;
-            label18.Location = new Point(29, 241);
+            label18.Location = new Point(20, 145);
+            label18.Margin = new Padding(2, 0, 2, 0);
             label18.Name = "label18";
-            label18.Size = new Size(82, 25);
+            label18.Size = new Size(54, 15);
             label18.TabIndex = 44;
             label18.Text = "Nombre:";
             // 
             // dataGridView3
             // 
             dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(9, 7);
+            dataGridView3.Location = new Point(6, 4);
+            dataGridView3.Margin = new Padding(2);
             dataGridView3.Name = "dataGridView3";
             dataGridView3.RowHeadersWidth = 62;
-            dataGridView3.Size = new Size(756, 157);
+            dataGridView3.Size = new Size(529, 94);
             dataGridView3.TabIndex = 42;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(32, 193);
-            label5.Name = "label5";
-            label5.Size = new Size(34, 25);
-            label5.TabIndex = 62;
-            label5.Text = "ID:";
-            // 
-            // textBoxNombreR
-            // 
-            textBoxNombreR.Location = new Point(200, 238);
-            textBoxNombreR.Name = "textBoxNombreR";
-            textBoxNombreR.Size = new Size(150, 31);
-            textBoxNombreR.TabIndex = 63;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(799, 575);
+            ClientSize = new Size(559, 345);
             Controls.Add(tabControl1);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
             tabControl1.ResumeLayout(false);

@@ -56,66 +56,90 @@ namespace DAO
 
         public void AltaRepartidor(RepartidorEntity entity)
         {
-            using (var context = new AppDbContext())
+            try
             {
-                Repartidore nuevo = new Repartidore()
+                using (var context = new AppDbContext())
                 {
-                    RepartidorId = entity.Id,
-                    Nombre = entity.Nombre,
-                    Apellido = entity.Apellido,
-                    Empresa = entity.Empresa,
-                    LegajoNumero = entity.Num_Legajo,
-                    Telefono = entity.Telefono,
-                    CredencialValida = entity.Credencial_Valida
-                };
+                    Repartidore nuevo = new Repartidore()
+                    {
+                        RepartidorId = entity.Id,
+                        Nombre = entity.Nombre,
+                        Apellido = entity.Apellido,
+                        Empresa = entity.Empresa,
+                        LegajoNumero = entity.Num_Legajo,
+                        Telefono = entity.Telefono,
+                        CredencialValida = entity.Credencial_Valida
+                    };
 
-                context.Repartidores.Add(nuevo);
-                context.SaveChanges();
+                    context.Repartidores.Add(nuevo);
+                    context.SaveChanges();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
 
         public void EliminarRepartidor(string id)
         {
-            using (var context = new AppDbContext())
+            try
             {
-                // 1. Buscar residente
-                var repartidor = context.Repartidores.FirstOrDefault(r => r.RepartidorId == id);
-                if (repartidor == null)
-                    throw new Exception("Repartidor no encontrado.");
-
-                // 2. Eliminar lockers asociados
-                var lockers = context.Lockers.Where(l => l.RepartidorId == id).ToList();
-                if (lockers.Any())
+                using (var context = new AppDbContext())
                 {
-                    context.Lockers.RemoveRange(lockers);
-                }
-                // 4. Eliminar residente
-                context.Repartidores.Remove(repartidor);
+                    // 1. Buscar residente
+                    var repartidor = context.Repartidores.FirstOrDefault(r => r.RepartidorId == id);
+                    if (repartidor == null)
+                        throw new Exception("Repartidor no encontrado.");
 
-                // 5. Guardar cambios
-                context.SaveChanges();
+                    // 2. Eliminar lockers asociados
+                    var lockers = context.Lockers.Where(l => l.RepartidorId == id).ToList();
+                    if (lockers.Any())
+                    {
+                        context.Lockers.RemoveRange(lockers);
+                    }
+                    // 4. Eliminar residente
+                    context.Repartidores.Remove(repartidor);
+
+                    // 5. Guardar cambios
+                    context.SaveChanges();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         public void EditarRepartidor(RepartidorEntity rep)
         {
-            using (var context = new AppDbContext())
+            try
             {
-                var dbRep = context.Repartidores.FirstOrDefault(r => r.RepartidorId == rep.Id);
+                using (var context = new AppDbContext())
+                {
+                    var dbRep = context.Repartidores.FirstOrDefault(r => r.RepartidorId == rep.Id);
 
-                if (dbRep == null)
-                    throw new Exception("Repartidor no encontrado en la BD.");
+                    if (dbRep == null)
+                        throw new Exception("Repartidor no encontrado en la BD.");
 
-                dbRep.Nombre = rep.Nombre;
-                dbRep.Apellido = rep.Apellido;
-                dbRep.Empresa = rep.Empresa;
-                dbRep.LegajoNumero = rep.Num_Legajo;
-                dbRep.Telefono = rep.Telefono;
-                dbRep.CredencialValida = rep.Credencial_Valida;
+                    dbRep.Nombre = rep.Nombre;
+                    dbRep.Apellido = rep.Apellido;
+                    dbRep.Empresa = rep.Empresa;
+                    dbRep.LegajoNumero = rep.Num_Legajo;
+                    dbRep.Telefono = rep.Telefono;
+                    dbRep.CredencialValida = rep.Credencial_Valida;
 
-                context.SaveChanges();
+                    context.SaveChanges();
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
 

@@ -30,7 +30,6 @@ namespace BLL
             try
             {
                 return residenteData.GetById(id);
-
             }
             catch (Exception ex)
             {
@@ -40,29 +39,54 @@ namespace BLL
    
         public void AltaResidente(ResidenteEntity entity)
         {
-            if (string.IsNullOrWhiteSpace(entity.Nombre))
-                throw new Exception("El nombre es obligatorio.");
-
-            residenteData.AltaResidente(entity);
-        }
-
-        public List<ResidenteEntity> ObtenerResidentes()
-        {
             try
             {
-                var residentes = residenteData.GetAll();
-                return residentes;
+                if (string.IsNullOrWhiteSpace(entity.Nombre))
+                    throw new Exception("El nombre es obligatorio.");
+                if (entity.Apellido == null || entity.Telefono == null || entity.Nombre == null || entity.Departamento == null || entity.Email == null || entity.Pref_Notificacion == null)
+                {
+                    throw new Exception("No se aceptan campos nulos.");
+                }
+                foreach (var res in getAll())
+                {
+                    if (res.Email == entity.Email)
+                    {
+                        throw new Exception("Este mail ya esta en uso.");
+                    }
+                    if (res.Telefono == entity.Telefono)
+                    {
+                        throw new Exception("Este telefono ya esta en uso.");
+                    }
+                }
+                residenteData.AltaResidente(entity);
             }
-            catch (Exception ex) { throw; }
-
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
         public void ActualizarResidente(ResidenteEntity entity)
         {
             try
             {
+                if (entity.Apellido == null || entity.Telefono == null || entity.Nombre == null || entity.Departamento == null || entity.Email == null || entity.Pref_Notificacion == null)
+                {
+                    throw new Exception("No se aceptan campos nulos.");
+                }
+                foreach (var res in getAll())
+                {
+                    if (res.Email == entity.Email)
+                    {
+                        throw new Exception("Este mail ya esta en uso.");
+                    }
+                    if (res.Telefono == entity.Telefono)
+                    {
+                        throw new Exception("Este telefono ya esta en uso.");
+                    }
+                }
                 residenteData.Update(entity);
             }
-            catch
+            catch (Exception ex)
             {
                 throw;
             }
@@ -72,9 +96,13 @@ namespace BLL
         {
             try
             {
+                if (getById(id) == null)
+                {
+                    throw new Exception("No se encontro el residente a eliminar.");
+                }
                 residenteData.Delete(id);
             }
-            catch
+            catch (Exception ex)
             {
                 throw;
             }
