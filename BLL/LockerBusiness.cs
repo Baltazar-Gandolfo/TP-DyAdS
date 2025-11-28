@@ -14,18 +14,6 @@ namespace BLL
         private RepartidorBusiness repartidorBusiness = new RepartidorBusiness();
         private ResidenteBusiness residenteBusiness = new ResidenteBusiness();
 
-        public List<LockerEntity> ObtenerTodos()
-        {
-            try
-            {
-                return lockerData.getAll();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
         public LockerEntity BuscarPorCodigo(string codigo)
         {
             try
@@ -64,7 +52,15 @@ namespace BLL
 
         public void EliminarLocker(int idLocker)
         {
-            lockerData.EliminarLocker(idLocker);
+            try
+            {
+                lockerData.EliminarLocker(idLocker);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
         public List<LockerEntity> getAll()
         {

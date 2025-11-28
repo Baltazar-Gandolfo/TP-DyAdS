@@ -12,20 +12,111 @@ namespace BLL
     public class UsuarioBusiness
     {
         private readonly UsuarioData usuarioData = new UsuarioData();
+        private static Dictionary<string, int> intentosFallidos = new Dictionary<string, int>();
+        private static Dictionary<string, DateTime> bloqueados = new Dictionary<string, DateTime>();
 
+        public List<UsuarioEntity> getAll()
+        {
+            try
+            {
+                return usuarioData.getAll();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public UsuarioEntity Login(string nombreUsuario, string contraseña, string rol)
         {
-            var usuario = usuarioData.getByNombreContraseña(nombreUsuario, contraseña, rol);
+            try
+            {
+                // 1. Verificar si está bloqueado
+                if (bloqueados.ContainsKey(nombreUsuario))
+                {
+                    if (bloqueados[nombreUsuario] > DateTime.Now)
+                    {
+                        throw new Exception("Usuario bloqueado temporalmente. Intente más tarde.");
+                    }
+                    else
+                    {
+                        // Ya venció el bloqueo → quitarlo
+                        bloqueados.Remove(nombreUsuario);
+                        intentosFallidos[nombreUsuario] = 0;
+                    }
+                }
 
-            if (usuario == null)
-                throw new Exception("Usuario, contraseña o rol incorrectos.");
+                // 2. Validar las credenciales
+                var usuario = usuarioData.getByNombreContraseña(nombreUsuario, contraseña, rol);
 
-            return usuario;
+                if (usuario == null)
+                {
+                    // Si no existe, aumentar intentos
+                    if (!intentosFallidos.ContainsKey(nombreUsuario))
+                        intentosFallidos[nombreUsuario] = 0;
+
+                    intentosFallidos[nombreUsuario]++;
+
+                    // Si supera 4 intentos → bloquear
+                    if (intentosFallidos[nombreUsuario] >= 4)
+                    {
+                        bloqueados[nombreUsuario] = DateTime.Now.AddMinutes(1); // 1 min
+                        throw new Exception("Usuario bloqueado por exceder los intentos.");
+                    }
+
+                    throw new Exception("Usuario, contraseña o rol incorrectos.");
+                }
+
+                // 3. Si inició sesión bien → resetear intentos
+                if (intentosFallidos.ContainsKey(nombreUsuario))
+                    intentosFallidos[nombreUsuario] = 0;
+
+                return usuario;
+                /*
+                if (intentos >= 4)
+                {
+                    throw new Exception("Usuario, contraseña o rol incorrectos.");
+
+                }
+                if (usuarioData.getByNombreContraseña(nombreUsuario, contraseña, rol) == null)
+                {
+                    throw new Exception("Usuario, contraseña o rol incorrectos.");
+                    intentos = intentos + 1;
+                }
+                var usuario = usuarioData.getByNombreContraseña(nombreUsuario, contraseña, rol);
+
+
+                intentos = 0;
+                return usuario;
+                */
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         public void Registrar(string nombreUsuario, string contraseña, string rol)
         {
-            usuarioData.Registrar(nombreUsuario, contraseña, rol);
+            try
+            {
+                if (nombreUsuario == null || contraseña == null || rol == null)
+                {
+                    throw new Exception("No se aceptan campos nulos.");
+                }
+                foreach (var user in getAll())
+                {
+                    if (user.Nombre_Usuario == nombreUsuario)
+                    {
+                        throw new Exception("Este nombre de usuario ya esta en uso.");
+                    }
+                }
+                usuarioData.Registrar(nombreUsuario, contraseña, rol);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
