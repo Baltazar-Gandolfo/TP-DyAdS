@@ -75,13 +75,20 @@ namespace BLL
                 }
                 foreach (var res in getAll())
                 {
-                    if (res.Email == entity.Email)
+                    if(res.Id != entity.Id)
                     {
-                        throw new Exception("Este mail ya esta en uso.");
-                    }
-                    if (res.Telefono == entity.Telefono)
-                    {
-                        throw new Exception("Este telefono ya esta en uso.");
+                        if (res.Departamento == entity.Departamento)
+                        {
+                            throw new Exception("Este departamento ya esta ocupado por otro residente. \nChequee el nr de departamento colocado.");
+                        }
+                        if (res.Email == entity.Email)
+                        {
+                            throw new Exception("Este mail ya esta en uso.");
+                        }
+                        if (res.Telefono == entity.Telefono)
+                        {
+                            throw new Exception("Este telefono ya esta en uso.");
+                        }
                     }
                 }
                 residenteData.Update(entity);

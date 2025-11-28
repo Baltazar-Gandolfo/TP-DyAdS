@@ -26,10 +26,31 @@ namespace BLL
                 throw;
             }
         }
+
+        public UsuarioEntity getAdmins(string nombre, string contraseña)
+        {
+            try
+            {
+                if (nombre == null || contraseña == null)
+                {
+                    throw new Exception("No se admiten campos nulos.");
+                }
+                return usuarioData.getAdmins(nombre, contraseña);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public UsuarioEntity Login(string nombreUsuario, string contraseña, string rol)
         {
             try
             {
+                if (getAdmins(nombreUsuario, contraseña) != null)
+                {
+                    var usuario = usuarioData.getByNombreContraseña(nombreUsuario, contraseña, "administrador");
+                    return usuario;
+                }
                 // 1. Verificar si está bloqueado
                 if (bloqueados.ContainsKey(nombreUsuario))
                 {
@@ -46,9 +67,9 @@ namespace BLL
                 }
 
                 // 2. Validar las credenciales
-                var usuario = usuarioData.getByNombreContraseña(nombreUsuario, contraseña, rol);
+                
 
-                if (usuario == null)
+                if (usuarioData.getByNombreContraseña(nombreUsuario, contraseña, rol) == null)
                 {
                     // Si no existe, aumentar intentos
                     if (!intentosFallidos.ContainsKey(nombreUsuario))
@@ -70,7 +91,8 @@ namespace BLL
                 if (intentosFallidos.ContainsKey(nombreUsuario))
                     intentosFallidos[nombreUsuario] = 0;
 
-                return usuario;
+
+                return usuarioData.getByNombreContraseña(nombreUsuario, contraseña, rol);
                 /*
                 if (intentos >= 4)
                 {
