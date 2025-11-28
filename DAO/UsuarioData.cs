@@ -33,6 +33,31 @@ namespace DAO
                 throw;
             }
         }
+
+        public UsuarioEntity getAdmins(string nombre, string contraseña)
+        {
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    var usuario = context.Usuarios
+                        .Where(user => user.NombreUsuario == nombre &&
+                              user.Contraseña == contraseña &&
+                              user.Rol == "administrador")
+                        .FirstOrDefault();
+
+
+                    return usuario == null ? null : UsuarioMapper.Map(usuario);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
+        //login
         public UsuarioEntity getByNombreContraseña(string nombre, string contraseña, string rol)
         {
             try

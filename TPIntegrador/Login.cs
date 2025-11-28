@@ -53,12 +53,11 @@ namespace TPIntegrador
 
         private UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
 
+        //LOGIN
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                UsuarioBusiness usuarioBusiness = new UsuarioBusiness();
-
                 var usuario = usuarioBusiness.Login(
                     loginUser.Text,
                     claveUser.Text,
@@ -69,8 +68,8 @@ namespace TPIntegrador
                 BienvenidaForm bienvenida = new BienvenidaForm(usuario.Nombre_Usuario);
                 bienvenida.ShowDialog();
 
-                Form1 juego = new Form1(usuario);
-                juego.Show();
+                Form1 form1 = new Form1(usuario);
+                form1.Show();
                 this.Hide();
             }
             catch (Exception ex)
@@ -80,6 +79,7 @@ namespace TPIntegrador
 
         }
 
+        //REGISTRO
         private void lbl_registro_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             try
